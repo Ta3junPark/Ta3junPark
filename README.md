@@ -1,4 +1,6 @@
 ### Hi there 👋 Welcome to my page!
+🏅 What I did is ...
+11th E-icon world contest (Jun, 2021 ~ Nov, 2021) - winning a 3rd prize
 
 <!--
 **Ta3junPark/Ta3junPark** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
