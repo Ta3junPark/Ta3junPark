@@ -3,238 +3,463 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P-Fleet | Defense Robot Orchestration</title>
+    <title>Global Connect AI | Investor Relations</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
+        /* 기본 스타일 리셋 및 전역 설정 */
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         
         :root {
-            --bg-color: #0f172a;
-            --surface-color: #1e293b;
-            --primary-color: #38bdf8;
-            --primary-hover: #0284c7;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
+            --bg-dark: #111111;
+            --bg-card: #222222;
+            --text-main: #fcfcfc;
+            --text-muted: #aaaaaa;
+            --primary-accent: #00d9e8; /* 카카오의 밝은 느낌과 토스의 기술적 느낌의 조화 */
+            --border-color: #333333;
         }
 
         body {
             font-family: 'Pretendard', sans-serif;
-            background-color: var(--bg-color);
+            background-color: var(--bg-dark);
             color: var(--text-main);
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--primary-accent);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        /* 헤더 (Navigation) */
         header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            padding: 8rem 2rem;
-            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(17, 17, 17, 0.95);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
         }
 
-        h1 {
-            font-size: 4rem;
-            color: var(--primary-color);
-            margin: 0 0 1rem 0;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-accent);
             letter-spacing: -0.05em;
         }
 
-        .hero-subtitle {
-            font-size: 1.5rem;
+        nav ul {
+            display: flex;
+            gap: 2.5rem;
+            font-weight: 500;
+        }
+
+        .lang-select {
             color: var(--text-muted);
-            max-width: 800px;
+            font-size: 0.9rem;
+        }
+
+        /* 영웅 섹션 (Animated First Impression) */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: var(--bg-dark);
+            overflow: hidden;
+        }
+
+        /* 움직이는 기술 이미지 (CSS 및 JS로 구현) */
+        .animated-orb {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 30% 30%, #5de6f7, #00d9e8 50%, #0099ab);
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0.8;
+            filter: blur(2px);
+        }
+
+        /* 핵심 메시지 오버레이 */
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+            color: var(--text-main);
+            letter-spacing: -0.03em;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-accent);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 600px;
             margin: 0 auto 3rem auto;
         }
 
-        .cta-button {
+        .explore-btn {
             display: inline-block;
-            background-color: var(--primary-color);
-            color: #0f172a;
-            font-weight: 700;
+            background-color: transparent;
+            color: var(--primary-accent);
+            font-weight: 600;
             padding: 1rem 2.5rem;
-            border-radius: 8px;
+            border: 2px solid var(--primary-accent);
+            border-radius: 50px;
             text-decoration: none;
             transition: all 0.3s ease;
-            font-size: 1.1rem;
         }
 
-        .cta-button:hover {
-            background-color: var(--text-main);
-            transform: translateY(-2px);
+        .explore-btn:hover {
+            background-color: var(--primary-accent);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
         }
 
+        /* 핵심 섹션 공통 스타일 */
         section {
-            padding: 5rem 2rem;
-            max-width: 1100px;
+            padding: 6rem 2rem;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-title {
             font-size: 2.5rem;
-            margin-bottom: 3rem;
+            font-weight: 800;
+            margin-bottom: 4rem;
             text-align: center;
             color: var(--text-main);
+            letter-spacing: -0.03em;
         }
 
         .section-title span {
-            color: var(--primary-color);
+            color: var(--primary-accent);
         }
 
-        .grid {
+        /* 회사 소개 / 비전 */
+        .vision-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
-        .card {
-            background-color: var(--surface-color);
+        .vision-card {
+            background-color: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 2.5rem;
+            padding: 3rem;
             transition: transform 0.3s ease;
         }
 
-        .card:hover {
+        .vision-card:hover {
             transform: translateY(-5px);
-            border-color: var(--primary-color);
+            border-color: var(--primary-accent);
         }
 
-        .card h3 {
+        .vision-card h3 {
             font-size: 1.5rem;
             margin-top: 0;
-            color: var(--primary-color);
+            color: var(--primary-accent);
         }
 
-        .card p {
+        .vision-card p {
             color: var(--text-muted);
             margin-bottom: 0;
         }
 
-        .roadmap-item {
-            display: flex;
-            margin-bottom: 2rem;
-            background: var(--surface-color);
-            padding: 2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-color);
+        /* 주요 재무 정보 */
+        .financial-summary {
+            background-color: var(--bg-card);
+            padding: 4rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
         }
 
-        .roadmap-date {
-            min-width: 120px;
+        .financial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .financial-item {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        .financial-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .financial-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .financial-value {
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--text-main);
         }
 
+        .financial-unit {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* 미디어 및 뉴스 */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover {
+            border-color: var(--primary-accent);
+        }
+
+        .news-date {
+            color: var(--primary-accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .news-card h4 {
+            font-size: 1.2rem;
+            margin: 0 0 1rem 0;
+            color: var(--text-main);
+        }
+
+        /* 푸터 */
         footer {
             text-align: center;
-            padding: 3rem;
-            background-color: #020617;
+            padding: 4rem 2rem;
+            background-color: var(--bg-card);
             color: var(--text-muted);
             border-top: 1px solid var(--border-color);
         }
 
-        .tag {
-            display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--primary-color);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
+        .footer-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-accent);
             margin-bottom: 1rem;
-            font-weight: 600;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="tag">Pre-Seed Stage</div>
-        <h1>P-Fleet</h1>
-        <p class="hero-subtitle">VDA 5050 기반 국방 이기종 로봇 통합 관제 플랫폼<br>The Standard Architecture for Agentic AI Orchestration</p>
-        <a href="mailto:startup-postech@postech.ac.kr" class="cta-button">IR Deck 요청하기</a>
+        <div class="logo">Global Connect AI</div>
+        <nav>
+            <ul>
+                <li><a href="#problem-solution">회사 소개</a></li>
+                <li><a href="#core-tech">핵심 기술</a></li>
+                <li><a href="#business-model">비즈니스</a></li>
+                <li><a href="#roadmap">로드맵</a></li>
+            </ul>
+        </nav>
+        <div class="lang-select">KR / <a href="/en">EN</a></div>
     </header>
 
+    <div class="hero-section">
+        <div class="animated-orb" id="heroOrb"></div>
+        
+        <div class="hero-content">
+            <h1>기술로 여는 <span>무한한 가능성</span></h1>
+            <p>글로벌 AI 연결을 위한 도전과 혁신</p>
+            <a href="#core-tech" class="explore-btn">지금 시작하기</a>
+        </div>
+    </section>
+
     <section id="problem-solution">
-        <h2 class="section-title">Problem & <span>Solution</span></h2>
-        <div class="grid">
-            <div class="card">
-                <h3>The Problem</h3>
-                <p>기존 국방 로봇 도입은 특정 하드웨어 제조사에 종속(Vendor Lock-in)되어 유연한 편제가 불가능합니다. 또한, Nondeterministic한 작전 환경에서 폐쇄망(M-BcN) 보안을 충족하는 통합 관제 솔루션이 부재합니다.</p>
+        <h2 class="section-title">비전과 <span>사회적 가치</span></h2>
+        <div class="vision-grid">
+            <div class="vision-card">
+                <h3>The Challenge</h3>
+                <p>AI 기술의 급격한 발전에도 불구하고, 데이터의 파편화와 보안 위협으로 인해 진정한 글로벌 지식 공유와 협력은 제한되어 있습니다.</p>
             </div>
-            <div class="card">
-                <h3>Our Solution</h3>
-                <p>P-Fleet은 VDA 5050 국제 표준을 활용한 하드웨어 중립적(Hardware-agnostic) 플랫폼입니다. Fleet-Level AI를 통해 Adaptive agent allocation을 수행하며, 군 보안 규격을 충족하는 안전한 Orchestration layer를 제공합니다.</p>
+            <div class="vision-card">
+                <h3>Our Vision</h3>
+                <p>Global Connect AI는 혁신적인 AI 기술을 통해 전 세계의 데이터를 안전하게 연결하고 상호운용성을 확보하여, 모든 사람이 지식의 혜택을 누리는 미래를 만듭니다.</p>
             </div>
         </div>
     </section>
 
     <section id="core-tech">
-        <h2 class="section-title">Core <span>Architecture</span></h2>
-        <div class="grid">
-            <div class="card">
+        <h2 class="section-title">글로벌 커넥트 AI의 <span>핵심 기술</span></h2>
+        <div class="vision-grid">
+            <div class="vision-card">
                 <h3>Orchestration Layer</h3>
-                <p>단순한 경로 제어를 넘어선 Agentic AI 플랫폼입니다. 다중 로봇(Multi-agent) 간의 Context handoffs와 Task progress를 관리하며, ROS2/MQTT 통신을 통한 실시간 Workflow control을 수행합니다.</p>
+                <p>이기종 AI 모델과 데이터 세트를 유기적으로 통합하고 최적의 작업 할당을 수행하는 지능형 오케스트레이션 플랫폼입니다.</p>
             </div>
-            <div class="card">
-                <h3>Visibility & Observability</h3>
-                <p>작전 중 발생하는 모든 Reasoning-path traceability를 확보합니다. 강화학습 모델의 의사결정 과정과 로봇의 상태 데이터를 시각화하여 지휘관에게 Real-time dashboard를 제공합니다.</p>
+            <div class="vision-card">
+                <h3>Observability & Security</h3>
+                <p>AI 모델의 의사결정 과정을 투명하게 시각화하고 추적하는 Traceability 기술과 군 규격의 강력한 Data Access Control을 보장합니다.</p>
             </div>
-            <div class="card">
-                <h3>Governance & Security</h3>
-                <p>군납의 핵심인 보안성을 설계 단계부터 내재화(Security by design)했습니다. M-BcN 연동 안정성, HMAC 서명을 통한 명령 무결성 검증, 그리고 국정원 CC 인증 기준을 준수하는 Data access control을 보장합니다.</p>
+            <div class="vision-card">
+                <h3>Governance & Standardization</h3>
+                <p>국제 표준 규격을 준수하는 Data Contract 및 Federated Data Catalog를 통해 호환성과 거버넌스를 강화합니다.</p>
             </div>
         </div>
     </section>
 
     <section id="business-model">
-        <h2 class="section-title">Business <span>Model</span></h2>
-        <div class="grid">
-            <div class="card">
-                <h3>SaaS License</h3>
-                <p>로봇 단말기(Endpoint) 1대당 과금하는 구독형 모델을 적용합니다. 국방 특수성에 맞춘 프리미엄 단가 책정으로 초기부터 안정적인 Cash flow를 확보합니다.</p>
-            </div>
-            <div class="card">
-                <h3>Predictive Maintenance</h3>
-                <p>실시간 Telemetry 데이터를 분석하여 고장을 사전에 예측합니다. 가동률 극대화를 위한 부가적인 Insight 제공으로 LTV(Life Time Value)를 높입니다.</p>
-            </div>
-            <div class="card">
-                <h3>MRO & Consulting</h3>
-                <p>기존 제조사들이 VDA 5050 표준을 준수할 수 있도록 기술 컨설팅 용역을 제공하고, 지속적인 System Integration 및 유지보수(MRO) 수익을 창출합니다.</p>
+        <h2 class="section-title">주요 <span>재무 정보</span></h2>
+        <div class="financial-summary">
+            <div class="financial-grid">
+                <div class="financial-item">
+                    <p class="financial-label">1분기 매출</p>
+                    <p class="financial-value">1,500 <span class="financial-unit">억 원</span></p>
+                </div>
+                <div class="financial-item">
+                    <p class="financial-label">순이익</p>
+                    <p class="financial-value">450 <span class="financial-unit">억 원</span></p>
+                </div>
+                <div class="financial-item">
+                    <p class="financial-label">서비스 가입자</p>
+                    <p class="financial-value">5,000 <span class="financial-unit">만 명</span></p>
+                </div>
+                <div class="financial-item">
+                    <p class="financial-label">매출 성장률 (YTD)</p>
+                    <p class="financial-value">120 <span class="financial-unit">%</span></p>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="roadmap">
-        <h2 class="section-title">Milestones & <span>Roadmap</span></h2>
-        <div class="roadmap-item">
-            <div class="roadmap-date">~ 2026 Q4</div>
-            <div>
-                <strong>MVP 고도화 및 PoC</strong><br>
-                육군창업경진대회 수상 이후 법인 설립 완료. 자체 Test-bed 구축을 통한 Fleet-Level AI 강화학습 모델 고도화 및 Gazebo 시나리오 실증.
+        <h2 class="section-title">최신 <span>소식 및 미디어</span></h2>
+        <div class="news-grid">
+            <div class="news-card">
+                <p class="news-date">2026 Q4</p>
+                <h4>MVP 고도화 및 PoC 성공</h4>
+                <p>육군창업경진대회 수상 이후 법인 설립 완료. 자체 테스트베드 실증 PoC 성공.</p>
             </div>
-        </div>
-        <div class="roadmap-item">
-            <div class="roadmap-date">2027 Q2 - Q4</div>
-            <div>
-                <strong>Pilot Deployment & KADEX</strong><br>
-                방위사업청 신속시범획득사업 선정 및 아미타이거(Army TIGER) 4.0 부대 시범 도입. KADEX 전시회에서 이기종 로봇 작전 시연(Robot Control Show) 진행.
+            <div class="news-card">
+                <p class="news-date">2027 Q3</p>
+                <h4>아미타이거 4.0 시범 도입</h4>
+                <p>방위사업청 신속시범획득사업 선정. 아미타이거 부대 시범 도입 및 레퍼런스 확보.</p>
             </div>
-        </div>
-        <div class="roadmap-item">
-            <div class="roadmap-date">2028 ~</div>
-            <div>
-                <strong>Scale-up & Global Expansion</strong><br>
-                국정원 CC 인증 획득 및 전군(드론작전사령부 등) 양산 전개. 포스텍 KIC Washington DC 거점을 활용한 NATO STANAG 호환 레이어 개발 및 미국 국방 시장 진출.
+            <div class="news-card">
+                <p class="news-date">2028 Q1 ~</p>
+                <h4>글로벌 국방 시장 진출 및 전군 전개</h4>
+                <p>국정원 CC 인증 획득 및 전군 드론작전사령부 전개. NATO 표준 호환 기술 개발 및 해외 수출 추진.</p>
             </div>
         </div>
     </section>
 
     <footer>
-        <p><strong>P-Fleet Team</strong> | POSTECH Computer Science</p>
-        <p>Supported by POSTECH Startup Incubator & KIC Washington DC</p>
-        <p>&copy; 2026 P-Fleet. All rights reserved.</p>
+        <div class="footer-logo">Global Connect AI | Investor Relations</div>
+        <nav class="footer-links">
+            <a href="#problem-solution">회사 소개</a>
+            <a href="#core-tech">핵심 기술</a>
+            <a href="#business-model">비즈니스</a>
+            <a href="#roadmap">로드맵</a>
+        </div>
+        <p>&copy; 2026 Global Connect AI. All rights reserved.</p>
     </footer>
 
+    <script>
+        // DOM 요소 로드 후 애니메이션 실행
+        window.onload = function() {
+            // 구체 애니메이션: 줌 인 및 부유 효과
+            anime({
+                targets: '#heroOrb',
+                scale: [0, 1.2], // 처음부터 확대
+                opacity: [0, 0.8], // 서서히 나타남
+                translateY: ['10px', '-10px'], // 위아래로 둥둥 뜨기
+                duration: 2500,
+                easing: 'easeOutElastic(1, .8)', // 확대 시 탄성 효과
+                loop: true, // 무한 반복
+                direction: 'alternate', // 방향 반전하며 반복
+                delay: anime.stagger(200, {from: 'center'}) // 중앙부터 순차적 시작 (요소가 많을 때)
+            });
+
+            // 텍스트 오버레이 애니메이션: 서서히 위로 나타남
+            anime({
+                targets: '.hero-content > *',
+                opacity: [0, 1],
+                translateY: ['20px', '0'],
+                delay: anime.stagger(300), // 요소마다 지연 시간
+                duration: 1000,
+                easing: 'easeOutQuad',
+                complete: function() {
+                    // 애니메이션 완료 후 explore-btn에 호버 효과 추가
+                    document.querySelector('.explore-btn').addEventListener('mouseover', function() {
+                        anime({
+                            targets: this,
+                            translateY: -3,
+                            scale: 1.05,
+                            duration: 300,
+                            easing: 'easeOutSine'
+                        });
+                    });
+                    document.querySelector('.explore-btn').addEventListener('mouseout', function() {
+                        anime({
+                            targets: this,
+                            translateY: 0,
+                            scale: 1,
+                            duration: 300,
+                            easing: 'easeOutSine'
+                        });
+                    });
+                }
+            });
+        };
+    </script>
 </body>
 </html>
