@@ -1,142 +1,1014 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>P-Fleet | Story IR</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>P-Fleet | Investor Relations</title>
 <style>
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 :root {
-  --bg: #ffffff;
-  --text-main: #111827;
-  --text-sub: #6b7280;
-  --primary: #fee500;
+  --bg: #f6f7f9;
+  --bg-soft: #eef1f5;
+  --surface: rgba(255,255,255,0.78);
+  --surface-strong: #ffffff;
+  --text: #111111;
+  --muted: #5f6673;
+  --line: rgba(17,17,17,0.08);
+  --yellow: #fee500;
+  --yellow-deep: #f4d000;
+  --blue: #4f7cff;
+  --shadow: 0 20px 50px rgba(17,17,17,0.08);
+  --radius-xl: 32px;
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --max: 1280px;
 }
 
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: 'Pretendard', sans-serif;
-  color: var(--text-main);
-  background: var(--bg);
+  color: var(--text);
+  background:
+    radial-gradient(circle at top right, rgba(79,124,255,0.10), transparent 24%),
+    radial-gradient(circle at 10% 20%, rgba(254,229,0,0.22), transparent 18%),
+    var(--bg);
+  line-height: 1.65;
 }
 
-.section {
-  height: 100vh;
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.container {
+  width: min(calc(100% - 40px), var(--max));
+  margin: 0 auto;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(18px);
+  background: rgba(246,247,249,0.72);
+  border-bottom: 1px solid rgba(17,17,17,0.06);
+}
+
+.nav-inner {
+  height: 76px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 2rem;
+  justify-content: space-between;
+  gap: 24px;
 }
 
-h1 {
-  font-size: 4rem;
-  margin-bottom: 1rem;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 1.05rem;
 }
 
-h2 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+.brand-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--yellow);
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.06);
 }
 
-p {
-  font-size: 1.4rem;
-  color: var(--text-sub);
-  max-width: 700px;
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  color: var(--muted);
+  font-size: 0.96rem;
 }
 
-.highlight {
-  background: var(--primary);
-  padding: 1rem 2rem;
+.nav-links a:hover { color: var(--text); }
+
+.hero {
+  padding: 52px 0 32px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 22px;
+  align-items: stretch;
+}
+
+.hero-main {
+  position: relative;
+  overflow: hidden;
+  min-height: 720px;
+  border-radius: 40px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.95), rgba(236,240,247,0.92)),
+    var(--surface-strong);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 56px;
+}
+
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.7;
+  background-image:
+    linear-gradient(rgba(79,124,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,124,255,0.08) 1px, transparent 1px);
+  background-size: 78px 78px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0.6));
+}
+
+.hero-overlay-1,
+.hero-overlay-2 {
+  position: absolute;
   border-radius: 999px;
-  font-weight: bold;
-  margin-bottom: 2rem;
+  filter: blur(2px);
 }
 
-.fade {
+.hero-overlay-1 {
+  width: 440px;
+  height: 440px;
+  right: -120px;
+  top: -80px;
+  background: rgba(79,124,255,0.12);
+}
+
+.hero-overlay-2 {
+  width: 280px;
+  height: 280px;
+  left: -90px;
+  bottom: -110px;
+  background: rgba(254,229,0,0.24);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.74);
+  border: 1px solid rgba(17,17,17,0.06);
+  color: #313846;
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--yellow);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -0.06em;
+}
+
+.hero h1 .subtle {
+  display: block;
+  color: #7b8290;
+}
+
+.hero-copy {
+  margin: 26px 0 0;
+  max-width: 720px;
+  font-size: 1.22rem;
+  color: var(--muted);
+}
+
+.hero-bottom {
+  position: absolute;
+  left: 56px;
+  right: 56px;
+  bottom: 42px;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.glass-card {
+  border-radius: 24px;
+  padding: 22px 24px;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(17,17,17,0.08);
+}
+
+.glass-card h3,
+.metric-card h3,
+.info-card h3,
+.section-card h3,
+.arch-card h3,
+.timeline-card h3,
+.value-card h3,
+.cta-card h3 { margin: 0 0 10px; font-size: 1.05rem; }
+
+.glass-card p,
+.metric-card p,
+.info-card p,
+.section-card p,
+.arch-card p,
+.timeline-card p,
+.value-card p,
+.feature-list li,
+.kpi-note,
+.market-note { margin: 0; color: var(--muted); }
+
+.hero-side {
+  display: grid;
+  gap: 22px;
+}
+
+.metric-card,
+.info-card,
+.section-card,
+.arch-card,
+.timeline-card,
+.value-card,
+.cta-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.metric-card {
+  background: #1f1f1f;
+  color: #ffffff;
+  padding: 34px;
+  min-height: 230px;
+}
+
+.metric-card .big {
+  font-size: clamp(3rem, 5vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-weight: 800;
+}
+
+.metric-card .label {
+  margin-top: 12px;
+  color: rgba(255,255,255,0.72);
+  font-size: 0.98rem;
+}
+
+.metric-card .foot {
+  margin-top: 30px;
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.62);
+}
+
+.info-card {
+  padding: 34px;
+  min-height: 250px;
+}
+
+.info-card.yellow {
+  background: linear-gradient(180deg, #fff6a8, #fee500);
+}
+
+.info-card.white {
+  background: rgba(255,255,255,0.88);
+}
+
+.info-card .small-date {
+  font-size: 0.95rem;
+  color: rgba(17,17,17,0.6);
+  margin-top: 14px;
+}
+
+section.section {
+  padding: 100px 0;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 34px;
+  align-items: end;
+}
+
+.section-kicker {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #6d7380;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.section-title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  line-height: 1.06;
+  letter-spacing: -0.05em;
+}
+
+.section-desc {
+  max-width: 560px;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.two-col,
+.three-col,
+.four-col {
+  display: grid;
+  gap: 18px;
+}
+
+.two-col { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.three-col { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.four-col { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+.section-card,
+.arch-card,
+.timeline-card,
+.value-card,
+.cta-card {
+  padding: 30px;
+}
+
+.section-card strong,
+.arch-card strong,
+.timeline-card strong,
+.value-card strong {
+  color: var(--text);
+}
+
+.section-card .number {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: #111111;
+  color: #ffffff;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.feature-list {
+  padding-left: 18px;
+  margin: 14px 0 0;
+}
+
+.feature-list li + li { margin-top: 8px; }
+
+.arch-diagram {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr 1.1fr;
+  gap: 18px;
+  align-items: center;
+}
+
+.arch-center {
+  text-align: center;
+  padding: 28px 18px;
+  border-radius: 26px;
+  background: linear-gradient(180deg, #fff7b8, #fee500);
+  border: 1px solid rgba(17,17,17,0.08);
+  box-shadow: var(--shadow);
+}
+
+.arch-center h3 {
+  margin: 0 0 12px;
+  font-size: 1.4rem;
+}
+
+.arch-center p { margin: 0; color: rgba(17,17,17,0.72); }
+
+.kpi-strip {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 14px;
+}
+
+.kpi {
+  padding: 20px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid var(--line);
+}
+
+.kpi .key {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.kpi .val {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.market-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.market-box {
+  padding: 34px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.82);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.market-box .market-title {
+  margin: 0 0 12px;
+  font-size: 1.3rem;
+}
+
+.market-box .market-note {
+  color: var(--muted);
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 18px;
+}
+
+.timeline-card .time {
+  display: inline-block;
+  padding: 7px 11px;
+  background: rgba(17,17,17,0.05);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.timeline-card ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.timeline-card li + li { margin-top: 7px; }
+
+.cta-card {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 18px;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,244,176,0.92));
+}
+
+.cta-title {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 3.3vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 22px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.98rem;
+  border: 1px solid transparent;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(17,17,17,0.08);
+}
+
+.btn.primary {
+  background: #111111;
+  color: #ffffff;
+}
+
+.btn.secondary {
+  background: rgba(255,255,255,0.78);
+  color: #111111;
+  border-color: rgba(17,17,17,0.08);
+}
+
+.footer {
+  padding: 46px 0 70px;
+  color: #6f7683;
+  font-size: 0.96rem;
+}
+
+.footer-box {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(17,17,17,0.08);
+}
+
+.fade-up {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.fade.show {
+.fade-up.show {
   opacity: 1;
   transform: translateY(0);
 }
 
+@media (max-width: 1120px) {
+  .hero-grid,
+  .cta-card,
+  .market-grid,
+  .arch-diagram,
+  .timeline,
+  .three-col,
+  .four-col,
+  .two-col,
+  .kpi-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-main { min-height: auto; }
+  .hero-bottom {
+    position: static;
+    margin-top: 28px;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading {
+    display: block;
+  }
+}
+
+@media (max-width: 720px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero-main,
+  .metric-card,
+  .info-card,
+  .section-card,
+  .arch-card,
+  .timeline-card,
+  .value-card,
+  .cta-card {
+    border-radius: 24px;
+  }
+
+  .hero-main { padding: 34px 26px; }
+  .hero h1 { font-size: 2.8rem; }
+  .hero-copy { font-size: 1.02rem; }
+  section.section { padding: 72px 0; }
+}
 </style>
 </head>
-
 <body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-badge">P</div>
+        <span>P-Fleet 투자정보</span>
+      </div>
+      <div class="nav-links">
+        <a href="#thesis">투자포인트</a>
+        <a href="#problem">문제정의</a>
+        <a href="#solution">솔루션</a>
+        <a href="#architecture">핵심기술</a>
+        <a href="#business">사업모델</a>
+        <a href="#roadmap">로드맵</a>
+      </div>
+    </div>
+  </nav>
 
-<div class="section fade">
-  <div class="highlight">P-Fleet</div>
-  <h1>모든 로봇을 하나로</h1>
-  <p>AI 기반 이기종 로봇 통합 관제 플랫폼</p>
-</div>
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-main fade-up">
+        <div class="hero-pattern"></div>
+        <div class="hero-overlay-1"></div>
+        <div class="hero-overlay-2"></div>
+        <div class="hero-content">
+          <div class="eyebrow"><span class="dot"></span> Pre-Seed Stage · Defense Robotics Orchestration</div>
+          <h1>
+            국방 로봇 운용의 표준을
+            <span class="subtle">다시 설계합니다</span>
+          </h1>
+          <p class="hero-copy">
+            P-Fleet은 VDA 5050 기반 이기종 로봇 통합 관제 플랫폼입니다. 제조사별로 분절된 국방 로봇을 하나의 Fleet으로 연결하고, AI Orchestration을 통해 실전적인 배치·통제·가시성을 제공합니다.
+          </p>
+        </div>
+        <div class="hero-bottom">
+          <div class="glass-card">
+            <h3>핵심 메시지</h3>
+            <p>개별 로봇 제어가 아니라, 복수 에이전트와 복수 하드웨어를 하나의 작전 체계로 묶는 관제 레이어가 필요합니다.</p>
+          </div>
+          <div class="glass-card">
+            <h3>왜 지금인가</h3>
+            <p>국방 로봇 도입은 늘고 있지만, 실제 현장에서는 벤더 종속과 보안 문제 때문에 통합 운용이 가장 큰 병목으로 남아 있습니다.</p>
+          </div>
+        </div>
+      </div>
 
-<div class="section fade">
-  <h2>Problem</h2>
-  <p>국방 로봇은 제조사별로 분리되어 있어
-  하나의 작전으로 통합하기 어렵습니다</p>
-</div>
+      <div class="hero-side">
+        <div class="metric-card fade-up">
+          <div class="big">VDA 5050</div>
+          <div class="label">하드웨어 중립형 통합을 위한 핵심 표준</div>
+          <div class="foot">표준 기반 접근으로 벤더 락인을 줄이고, 장기적으로는 국방 로봇 스택의 상위 오케스트레이션 레이어를 지향합니다.</div>
+        </div>
 
-<div class="section fade">
-  <h2>우리는 다르게 봅니다</h2>
-  <p>로봇이 아니라
-  "Fleet"을 관리해야 합니다</p>
-</div>
+        <div class="info-card white fade-up">
+          <h3>2026년 목표</h3>
+          <p>MVP 고도화, 자체 테스트베드 구축, Fleet-Level AI 검증, Gazebo 시나리오 실증</p>
+          <div class="small-date">Execution Focus</div>
+        </div>
 
-<div class="section fade">
-  <h2>Solution</h2>
-  <p>VDA 5050 기반
-  하드웨어 중립 통합 플랫폼</p>
-</div>
+        <div class="info-card yellow fade-up">
+          <h3>투자자 관점의 질문</h3>
+          <p>“로봇 제조사가 아니라면, 어디에서 가장 큰 플랫폼 가치를 만들 수 있는가?”</p>
+          <div class="small-date">P-Fleet의 답: Orchestration Layer</div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-<div class="section fade">
-  <h2>AI Orchestration</h2>
-  <p>여러 로봇이 하나의 팀처럼 움직입니다</p>
-</div>
+  <section class="section" id="thesis">
+    <div class="container">
+      <div class="section-heading fade-up">
+        <div>
+          <span class="section-kicker">Investment Thesis</span>
+          <h2 class="section-title">왜 P-Fleet인가</h2>
+        </div>
+        <div class="section-desc">
+          로봇 하드웨어가 늘어날수록, 결국 가치는 “개별 기체”보다 “운용 체계”에서 커집니다. P-Fleet은 그 운영 체계를 표준화하고, AI로 고도화하는 팀입니다.
+        </div>
+      </div>
 
-<div class="section fade">
-  <h2>Real-time Visibility</h2>
-  <p>모든 상태를 실시간으로 추적합니다</p>
-</div>
+      <div class="four-col">
+        <div class="section-card fade-up">
+          <div class="number">01</div>
+          <h3>Vendor Lock-in 해소</h3>
+          <p>특정 제조사 중심의 폐쇄형 운용 구조에서 벗어나, 서로 다른 로봇을 동일한 프로토콜 아래에서 통합 운용할 수 있게 합니다.</p>
+        </div>
+        <div class="section-card fade-up">
+          <div class="number">02</div>
+          <h3>국방용 보안 설계</h3>
+          <p>폐쇄망 환경과 명령 무결성, 접근제어를 고려한 설계를 통해 민수용 관제 솔루션과 다른 국방형 아키텍처를 제안합니다.</p>
+        </div>
+        <div class="section-card fade-up">
+          <div class="number">03</div>
+          <h3>Fleet-Level AI</h3>
+          <p>단일 로봇의 자율성보다 상위 레벨의 배치, 작업 할당, 우선순위 조정이 더 큰 운용 효율을 만들어냅니다.</p>
+        </div>
+        <div class="section-card fade-up">
+          <div class="number">04</div>
+          <h3>Software Margin 구조</h3>
+          <p>하드웨어 제조가 아닌 소프트웨어 레이어에서 반복 가능한 라이선스, 유지보수, 컨설팅 수익 모델을 구축합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="section fade">
-  <h2>Secure by Design</h2>
-  <p>군 보안 기준을 충족하는 시스템</p>
-</div>
+  <section class="section" id="problem">
+    <div class="container">
+      <div class="section-heading fade-up">
+        <div>
+          <span class="section-kicker">Problem</span>
+          <h2 class="section-title">문제는 로봇이 아니라<br />운용의 분절입니다</h2>
+        </div>
+        <div class="section-desc">
+          현재 국방 로봇 도입은 장비 단위 구매 중심으로 이루어져 있습니다. 결과적으로 로봇은 늘어나도, 전체 작전을 하나로 묶는 관제·배치·협업 체계는 부재합니다.
+        </div>
+      </div>
 
-<div class="section fade">
-  <h2>Business Model</h2>
-  <p>SaaS + Maintenance + Consulting</p>
-</div>
+      <div class="three-col">
+        <div class="value-card fade-up">
+          <h3>하드웨어 종속</h3>
+          <p>제조사마다 상이한 인터페이스와 운영 방식으로 인해 부대 단위 유연 편제와 조합형 운용이 어렵습니다.</p>
+          <ul class="feature-list">
+            <li>장비 추가 시 통합 비용 증가</li>
+            <li>대체재 확보 어려움</li>
+            <li>현장 운영자 학습비용 증가</li>
+          </ul>
+        </div>
+        <div class="value-card fade-up">
+          <h3>실전 환경의 비결정성</h3>
+          <p>작전 환경은 예측 불가합니다. 임무 우선순위, 통신 상태, 장비 가용성이 계속 바뀌는 상황에서 정적 제어만으로는 부족합니다.</p>
+          <ul class="feature-list">
+            <li>동적 태스크 재분배 필요</li>
+            <li>로봇 상태 기반 실시간 판단 필요</li>
+            <li>복수 에이전트 간 컨텍스트 전달 필요</li>
+          </ul>
+        </div>
+        <div class="value-card fade-up">
+          <h3>보안형 통합관제 공백</h3>
+          <p>민수형 플랫폼을 그대로 전용하기 어려운 이유는 명확합니다. 폐쇄망, 무결성, 접근제어, 감사가능성까지 국방형 요구조건이 존재하기 때문입니다.</p>
+          <ul class="feature-list">
+            <li>M-BcN 연동 안정성</li>
+            <li>HMAC 기반 명령 검증</li>
+            <li>CC 인증 기준 고려</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="section fade">
-  <h2>2026 → 2028+</h2>
-  <p>MVP → Pilot → Global Expansion</p>
-</div>
+  <section class="section" id="solution">
+    <div class="container">
+      <div class="section-heading fade-up">
+        <div>
+          <span class="section-kicker">Solution</span>
+          <h2 class="section-title">P-Fleet은 상위 운영체계입니다</h2>
+        </div>
+        <div class="section-desc">
+          P-Fleet은 개별 로봇을 제어하는 앱이 아니라, 다양한 로봇과 임무를 하나의 운영 계층에서 조정하는 Orchestration Platform입니다.
+        </div>
+      </div>
 
-<div class="section fade">
-  <h2>Future of Defense Robotics</h2>
-  <p>P-Fleet이 표준이 됩니다</p>
-</div>
+      <div class="two-col">
+        <div class="section-card fade-up">
+          <h3>무엇을 하는가</h3>
+          <ul class="feature-list">
+            <li>VDA 5050 기반의 하드웨어 중립형 연결 레이어</li>
+            <li>임무·상태·가용성 기반의 Fleet-Level AI 할당</li>
+            <li>ROS2/MQTT 기반 실시간 워크플로 제어</li>
+            <li>운영자용 실시간 대시보드 및 관제 인터페이스</li>
+          </ul>
+        </div>
+        <div class="section-card fade-up">
+          <h3>어떤 가치를 만드는가</h3>
+          <ul class="feature-list">
+            <li>도입 장비 종류가 늘어날수록 플랫폼 가치 상승</li>
+            <li>장비 교체/증설에 대한 비용과 위험 감소</li>
+            <li>작전 중 예외 상황에 대한 재배치 속도 향상</li>
+            <li>지휘관에게 필요한 가시성과 추적성 제공</li>
+          </ul>
+        </div>
+      </div>
 
-<script>
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    }
-  });
-});
+      <div class="kpi-strip fade-up">
+        <div class="kpi">
+          <div class="key">Hardware-agnostic</div>
+          <div class="val">제조사 비종속 아키텍처</div>
+        </div>
+        <div class="kpi">
+          <div class="key">Adaptive Allocation</div>
+          <div class="val">상황 기반 태스크 재분배</div>
+        </div>
+        <div class="kpi">
+          <div class="key">Traceability</div>
+          <div class="val">의사결정 경로 관찰 가능</div>
+        </div>
+        <div class="kpi">
+          <div class="key">Security by Design</div>
+          <div class="val">초기 설계부터 보안 내재화</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-document.querySelectorAll('.fade').forEach(el => observer.observe(el));
-</script>
+  <section class="section" id="architecture">
+    <div class="container">
+      <div class="section-heading fade-up">
+        <div>
+          <span class="section-kicker">Core Architecture</span>
+          <h2 class="section-title">표준, AI, 보안을<br />하나로 묶습니다</h2>
+        </div>
+        <div class="section-desc">
+          핵심은 세 가지입니다. 다양한 로봇을 연결하는 표준, 복수 자산을 배치하는 AI, 그리고 국방 환경에서 신뢰 가능한 운영을 위한 보안 아키텍처입니다.
+        </div>
+      </div>
 
+      <div class="arch-diagram fade-up">
+        <div class="arch-card">
+          <h3>Input Layer</h3>
+          <p>이기종 로봇, 센서, 임무 정보, 운영자 명령, 통신 상태, 텔레메트리 데이터가 유입됩니다.</p>
+          <ul class="feature-list">
+            <li>UGV / 드론 / 기타 무인체계</li>
+            <li>상태 데이터 수집</li>
+            <li>임무 우선순위 입력</li>
+          </ul>
+        </div>
+
+        <div class="arch-center">
+          <h3>P-Fleet Orchestration Layer</h3>
+          <p>표준 인터페이스, Agent allocation, Workflow control, Policy enforcement, Observability를 통합한 상위 운영 계층</p>
+        </div>
+
+        <div class="arch-card">
+          <h3>Output Layer</h3>
+          <p>실시간 작업 할당, 재배치, 모니터링, 경보, 이력 추적 및 관제 화면으로 연결됩니다.</p>
+          <ul class="feature-list">
+            <li>Task dispatch</li>
+            <li>Dashboard & alerts</li>
+            <li>감사 가능한 로그 축적</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="three-col" style="margin-top:18px;">
+        <div class="arch-card fade-up">
+          <h3>Orchestration Layer</h3>
+          <p>단순 경로 제어가 아니라 다중 로봇 간 Context handoff와 Task progress를 관리하는 상위 운영 로직입니다. 실시간 이벤트에 따라 워크플로를 조정합니다.</p>
+        </div>
+        <div class="arch-card fade-up">
+          <h3>Visibility & Observability</h3>
+          <p>작전 중 발생하는 상태 변화와 의사결정 경로를 기록·시각화합니다. 지휘관은 실행 결과뿐 아니라 과정까지 추적할 수 있어야 합니다.</p>
+        </div>
+        <div class="arch-card fade-up">
+          <h3>Governance & Security</h3>
+          <p>M-BcN 연동, HMAC 기반 무결성 검증, 접근 권한 통제 등 군납형 요구사항을 고려한 보안 설계를 적용합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="business">
+    <div class="container">
+      <div class="section-heading fade-up">
+        <div>
+          <span class="section-kicker">Business Model</span>
+          <h2 class="section-title">반복 가능한 소프트웨어 수익 구조</h2>
+        </div>
+        <div class="section-desc">
+          제조업 기반 단발성 납품이 아니라, 플랫폼 라이선스와 운영 데이터 기반 부가 수익을 쌓아가는 구조를 지향합니다.
+        </div>
+      </div>
+
+      <div class="three-col">
+        <div class="section-card fade-up">
+          <h3>SaaS License</h3>
+          <p>단말 혹은 운용 단위 기준 라이선스 과금 모델입니다. 장비 수 증가와 운영 범위 확장이 매출 레버리지로 연결됩니다.</p>
+          <ul class="feature-list">
+            <li>반복 매출 기반</li>
+            <li>업데이트/기능 고도화 반영 용이</li>
+            <li>플랫폼 락인 형성 가능</li>
+          </ul>
+        </div>
+        <div class="section-card fade-up">
+          <h3>Predictive Maintenance</h3>
+          <p>텔레메트리 데이터 분석을 통해 이상징후 탐지와 고장 예측 인사이트를 제공합니다. 운용 효율과 가동률 개선이 핵심 가치입니다.</p>
+          <ul class="feature-list">
+            <li>실시간 상태 모니터링</li>
+            <li>정비 시점 최적화</li>
+            <li>추가 소프트웨어 매출 가능</li>
+          </ul>
+        </div>
+        <div class="section-card fade-up">
+          <h3>MRO & Consulting</h3>
+          <p>기존 제조사와 기관이 표준 기반 운용으로 전환할 수 있도록 시스템 통합, 컨설팅, 유지보수 서비스를 제공합니다.</p>
+          <ul class="feature-list">
+            <li>표준 도입 지원</li>
+            <li>현장 맞춤 SI</li>
+            <li>장기 유지보수 계약화 가능</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="market">
+    <div class="container">
+      <div class="section-heading fade-up">
+        <div>
+          <span class="section-kicker">Market Narrative</span>
+          <h2 class="section-title">시장은 하드웨어에서<br />운영 소프트웨어로 이동합니다</h2>
+        </div>
+        <div class="section-desc">
+          여기서는 아직 구체 수치 대신 투자 스토리 중심으로 정리했습니다. 실제 공개 전에는 TAM/SAM/SOM, 조달 규모, 파일럿 대상 시장 데이터를 추가하면 됩니다.
+        </div>
+      </div>
+
+      <div class="market-grid">
+        <div class="market-box fade-up">
+          <h3 class="market-title">시장 변화</h3>
+          <p class="market-note">국방 무인체계는 기체 수보다 운용 복잡도가 더 빠르게 증가합니다. 복수 자산이 동시에 투입될수록 통합 관제와 배치 알고리즘의 가치가 커집니다.</p>
+        </div>
+        <div class="market-box fade-up">
+          <h3 class="market-title">P-Fleet의 포지션</h3>
+          <p class="market-note">P-Fleet은 제조사가 아닌 상위 소프트웨어 계층에 위치합니다. 이는 특정 하드웨어의 성공 여부와 무관하게, 전체 생태계 확장에 따라 가치가 커질 수 있는 위치입니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="roadmap">
+    <div class="container">
+      <div class="section-heading fade-up">
+        <div>
+          <span class="section-kicker">Milestones & Roadmap</span>
+          <h2 class="section-title">검증에서 배치, 그리고 확장으로</h2>
+        </div>
+        <div class="section-desc">
+          현재 제공된 내용을 바탕으로 로드맵을 재구성했습니다. 나중에 실제 수주, 실증, 파트너십이 생기면 이 섹션은 가장 강력한 투자 설득 포인트가 됩니다.
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-card fade-up">
+          <div class="time">~ 2026 Q4</div>
+          <h3>MVP 고도화 및 PoC</h3>
+          <p>법인 설립 이후 자체 테스트베드를 구축하고, Fleet-Level AI 강화학습 모델 고도화와 Gazebo 시나리오 실증을 수행합니다.</p>
+          <ul>
+            <li>핵심 플랫폼 기능 안정화</li>
+            <li>테스트 환경 축적</li>
+            <li>초기 기술 검증 완료</li>
+          </ul>
+        </div>
+        <div class="timeline-card fade-up">
+          <div class="time">2027 Q2 - Q4</div>
+          <h3>Pilot Deployment</h3>
+          <p>신속시범획득사업 및 부대 시범 도입을 목표로, 실제 운영 환경에서 이기종 로봇 작전 시연과 파일럿 적용을 추진합니다.</p>
+          <ul>
+            <li>Army TIGER 4.0 시범 적용</li>
+            <li>KADEX 전시/데모</li>
+            <li>현장 데이터 확보</li>
+          </ul>
+        </div>
+        <div class="timeline-card fade-up">
+          <div class="time">2028 ~</div>
+          <h3>Scale-up & Global Expansion</h3>
+          <p>CC 인증 획득과 전군 확산, NATO STANAG 호환 레이어 개발, 미국 국방 시장 진입 가능성까지 확장합니다.</p>
+          <ul>
+            <li>조달/양산 체계 진입</li>
+            <li>표준 호환성 확대</li>
+            <li>글로벌 국방 SW 포지셔닝</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cta">
+    <div class="container">
+      <div class="cta-card fade-up">
+        <div>
+          <h2 class="cta-title">국방 로봇의 다음 경쟁력은<br />더 많은 기체가 아니라 더 나은 운영체계입니다</h2>
+          <p class="kpi-note">P-Fleet은 국방형 이기종 로봇 운용을 위한 표준 기반 Orchestration Platform을 구축하고 있습니다. 투자자용 IR Deck, PoC 계획, 기술 스택 상세 자료는 별도 공유가 가능합니다.</p>
+          <div class="button-row">
+            <a class="btn primary" href="mailto:startup-postech@postech.ac.kr">IR Deck 요청하기</a>
+            <a class="btn secondary" href="#thesis">투자포인트 다시 보기</a>
+          </div>
+        </div>
+        <div class="section-card" style="background: rgba(255,255,255,0.75);">
+          <h3>P-Fleet Team</h3>
+          <p>POSTECH Computer Science</p>
+          <p style="margin-top: 12px;">Supported by POSTECH Startup Incubator & KIC Washington DC</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-box">
+      <div>© 2026 P-Fleet. All rights reserved.</div>
+      <div>P-Fleet Investor Relations Website</div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
