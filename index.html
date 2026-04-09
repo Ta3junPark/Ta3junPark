@@ -1,503 +1,142 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P-Fleet | IR Highlight</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <style>
-        /* 전역 스타일 및 프리미엄 서체 설정 */
-        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-        
-        :root {
-            --bg-dark: #0a0a0a; /* 기아의 프리미엄 다크 */
-            --bg-card: #141414;
-            --text-main: #fcfcfc;
-            --text-muted: #888888;
-            --primary-accent: #38bdf8; /* P-Fleet 파란색 포인트 */
-            --border-color: #222222;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P-Fleet | Story IR</title>
 
-        body {
-            font-family: 'Pretendard', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.3s;
-        }
+:root {
+  --bg: #ffffff;
+  --text-main: #111827;
+  --text-sub: #6b7280;
+  --primary: #fee500;
+}
 
-        a:hover {
-            color: var(--primary-accent);
-        }
+body {
+  margin: 0;
+  font-family: 'Pretendard', sans-serif;
+  color: var(--text-main);
+  background: var(--bg);
+}
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+.section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
 
-        button {
-            cursor: pointer;
-            border: none;
-            outline: none;
-            transition: 0.3s;
-        }
+h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
 
-        /* 헤더 (Navigation) - 기아 스타일의 깔끔한 상단 바 */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(10, 10, 10, 0.95);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-        }
+h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary-accent);
-            letter-spacing: -0.05em;
-        }
+p {
+  font-size: 1.4rem;
+  color: var(--text-sub);
+  max-width: 700px;
+}
 
-        nav ul {
-            display: flex;
-            gap: 2.5rem;
-            font-weight: 500;
-        }
+.highlight {
+  background: var(--primary);
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
 
-        /* 영웅 섹션 (Animated Hero Section) - 토스/기아 스타일 */
-        .hero-section {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            background-color: var(--bg-dark);
-            overflow: hidden;
-        }
+.fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
 
-        /* 기아의 프리미엄 3D 동전 이미지 통합 및 애니메이션 */
-        .animated-coin {
-            width: 300px;
-            height: 300px;
-            background-image: url('data:image/jpeg;base64,...'); /* image_7.png 속 동전 이미지 (실제 데이터로 대체 필요) */
-            background-size: contain;
-            background-repeat: no-repeat;
-            position: absolute;
-            opacity: 0.8;
-            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
-        }
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-        /* 핵심 메시지 오버레이 */
-        .hero-content {
-            text-align: center;
-            z-index: 10;
-            padding: 2rem;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin: 0 0 1rem 0;
-            color: var(--text-main);
-            letter-spacing: -0.03em;
-        }
-
-        .hero-content h1 span {
-            color: var(--primary-accent);
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 3rem auto;
-        }
-
-        .explore-btn {
-            display: inline-block;
-            background-color: transparent;
-            color: var(--primary-accent);
-            font-weight: 600;
-            padding: 1rem 2.5rem;
-            border: 2px solid var(--primary-accent);
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .explore-btn:hover {
-            background-color: var(--primary-accent);
-            color: var(--bg-dark);
-            transform: translateY(-3px);
-        }
-
-        /* 핵심 섹션 공통 스타일 */
-        section {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            text-align: center;
-            color: var(--text-main);
-            letter-spacing: -0.03em;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        /* 카카오 스타일의 다채로운 풍선 디자인 통합 */
-        .balloon-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .balloon-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 3rem;
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-
-        .balloon-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-accent);
-        }
-
-        .balloon-card h3 {
-            font-size: 1.5rem;
-            margin-top: 0;
-            color: var(--primary-accent);
-        }
-
-        .balloon-card p {
-            color: var(--text-muted);
-            margin-bottom: 0;
-        }
-
-        /* 카카오 스타일의 다국어 풍선 아이콘 (JS로 나타남) */
-        .balloon-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            opacity: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--bg-dark);
-        }
-
-        /* 투자 하이라이트 (허위 정보 배제) */
-        .highlight-summary {
-            background-color: var(--bg-card);
-            padding: 4rem;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-        }
-
-        .highlight-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .highlight-item {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1.5rem;
-        }
-
-        .highlight-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .highlight-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .highlight-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .highlight-unit {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* 로드맵 (시각적 개선) */
-        .roadmap-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .roadmap-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .roadmap-card:hover {
-            border-color: var(--primary-accent);
-        }
-
-        .roadmap-date {
-            color: var(--primary-accent);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .roadmap-card h4 {
-            font-size: 1.2rem;
-            margin: 0 0 1rem 0;
-            color: var(--text-main);
-        }
-
-        /* 푸터 */
-        footer {
-            text-align: center;
-            padding: 4rem 2rem;
-            background-color: var(--bg-card);
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer-logo {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary-accent);
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
-    </style>
+</style>
 </head>
+
 <body>
 
-    <header>
-        <div class="logo">P-Fleet</div>
-        <nav>
-            <ul>
-                <li><a href="#vision">비전</a></li>
-                <li><a href="#tech">핵심 기술</a></li>
-                <li><a href="#highlight">투자 하이라이트</a></li>
-                <li><a href="#roadmap">로드맵</a></li>
-            </ul>
-        </nav>
-        <div class="lang-select">KR / <a href="/en">EN</a></div>
-    </header>
+<div class="section fade">
+  <div class="highlight">P-Fleet</div>
+  <h1>모든 로봇을 하나로</h1>
+  <p>AI 기반 이기종 로봇 통합 관제 플랫폼</p>
+</div>
 
-    <div class="hero-section">
-        <div class="animated-coin" id="heroCoin"></div>
-        
-        <div class="hero-content">
-            <h1>로봇 오케스트레이션의 <span>새로운 기준</span></h1>
-            <p>VDA 5050 기반 이기종 로봇 통합 관제 플랫폼</p>
-            <a href="#highlight" class="explore-btn">투자 하이라이트 보기</a>
-        </div>
-    </section>
+<div class="section fade">
+  <h2>Problem</h2>
+  <p>국방 로봇은 제조사별로 분리되어 있어
+  하나의 작전으로 통합하기 어렵습니다</p>
+</div>
 
-    <section id="vision">
-        <h2 class="section-title">비전과 <span>사회적 가치</span></h2>
-        <p class="section-subtitle">P-Fleet이 꿈꾸는 미래와 사회적 책임</p>
-        <div class="balloon-grid">
-            <div class="balloon-card">
-                <div class="balloon-icon" style="background-color: #ffeb3b;">Hello</div>
-                <h3>The Challenge</h3>
-                <p>이기종 로봇의 도입은 파편화된 데이터와 하드웨어 종속성으로 인해 비효율적이며 보안 위협에 노출되어 있습니다.</p>
-            </div>
-            <div class="balloon-card">
-                <div class="balloon-icon" style="background-color: #ff9800;">Hola</div>
-                <h3>Our Vision</h3>
-                <p>P-Fleet은 혁신적인 AI와 국제 표준 규격을 통해 전 세계의 로봇을 안전하게 연결하고 오케스트레이션하여 모두를 위한 지식 혜택을 구현합니다.</p>
-            </div>
-        </div>
-    </section>
+<div class="section fade">
+  <h2>우리는 다르게 봅니다</h2>
+  <p>로봇이 아니라
+  "Fleet"을 관리해야 합니다</p>
+</div>
 
-    <section id="tech">
-        <h2 class="section-title">P-Fleet의 <span>핵심 기술</span></h2>
-        <p class="section-subtitle">차별화된 기술력으로 여는 무한한 가능성</p>
-        <div class="balloon-grid">
-            <div class="balloon-card">
-                <div class="balloon-icon" style="background-color: #4caf50;">Namaste</div>
-                <h3>Fleet-Level AI Orchestration</h3>
-                <p>강화학습 기반의 지능형 작업 할당 및 충돌 방지 알고리즘을 통해 다중 로봇 간의 최적화된 Workflow control을 수행합니다.</p>
-            </div>
-            <div class="balloon-card">
-                <div class="balloon-icon" style="background-color: #3f51b5;">Hello</div>
-                <h3>VDA 5050 & M-BcN 보안</h3>
-                <p>국제 표준 규격 VDA 5050 채택으로 하드웨어 중립성을 확보하고, 군 규격의 강력한 M-BcN 데이터 액세스 제어와 명령 무결성 검증을 보장합니다.</p>
-            </div>
-            <div class="balloon-card">
-                <div class="balloon-icon" style="background-color: #e91e63;">Ciao</div>
-                <h3>Reasoning-Path Traceability</h3>
-                <p>AI 모델의 의사결정 과정을 투명하게 시각화하고 추적하는 Traceability 기술과 실시간 Telemetry 데이터를 통해 지휘관에게 Real-time dashboard를 제공합니다.</p>
-            </div>
-        </div>
-    </section>
+<div class="section fade">
+  <h2>Solution</h2>
+  <p>VDA 5050 기반
+  하드웨어 중립 통합 플랫폼</p>
+</div>
 
-    <section id="highlight">
-        <h2 class="section-title">투자 <span>하이라이트</span></h2>
-        <p class="section-subtitle">실질적인 마일스톤과 차별화된 가치</p>
-        <div class="highlight-summary">
-            <div class="highlight-grid">
-                <div class="highlight-item">
-                    <p class="highlight-label">파일럿 프로젝트</p>
-                    <p class="highlight-value">성공 <span class="highlight-unit">PoC</span></p>
-                </div>
-                <div class="highlight-item">
-                    <p class="highlight-label">육군 창업 경진대회</p>
-                    <p class="highlight-value">수상 <span class="highlight-unit">Achievement</span></p>
-                </div>
-                <div class="highlight-item">
-                    <p class="highlight-label">M-BcN 연동성</p>
-                    <p class="highlight-value">확보 <span class="highlight-unit">Security</span></p>
-                </div>
-                <div class="highlight-item">
-                    <p class="highlight-label">CC 인증 준비</p>
-                    <p class="highlight-value">착수 <span class="highlight-unit">Compliance</span></p>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="section fade">
+  <h2>AI Orchestration</h2>
+  <p>여러 로봇이 하나의 팀처럼 움직입니다</p>
+</div>
 
-    <section id="roadmap">
-        <h2 class="section-title">최신 <span>소식 및 로드맵</span></h2>
-        <p class="section-subtitle">성장을 향한 단계적 여정</p>
-        <div class="roadmap-grid">
-            <div class="roadmap-card">
-                <p class="roadmap-date">~ 2026 Q4</p>
-                <h4>MVP 고도화 및 법인 설립 완료</h4>
-                <p>자체 테스트베드 구축을 통한 AI 강화학습 모델 고도화 및 PoC 성공.</p>
-            </div>
-            <div class="roadmap-card">
-                <p class="roadmap-date">2027 Q2</p>
-                <h4>아미타이거 4.0 시범 도입 및 양산 확정</h4>
-                <p>방위사업청 신속시범획득사업 선정. 아미타이거 부대 시범 도입 및 레퍼런스 확보.</p>
-            </div>
-            <div class="roadmap-card">
-                <p class="roadmap-date">2027 Q4 ~</p>
-                <h4>전군 전개 및 글로벌 시장 진출</h4>
-                <p>국정원 CC 인증 획득 및 드론작전사령부 전개. NATO 표준 호환 기술 개발 및 해외 수출 추진.</p>
-            </div>
-        </div>
-    </section>
+<div class="section fade">
+  <h2>Real-time Visibility</h2>
+  <p>모든 상태를 실시간으로 추적합니다</p>
+</div>
 
-    <footer>
-        <div class="footer-logo">P-Fleet | Investor Relations</div>
-        <nav class="footer-links">
-            <a href="#vision">비전</a>
-            <a href="#tech">핵심 기술</a>
-            <a href="#highlight">투자 하이라이트</a>
-            <a href="#roadmap">로드맵</a>
-        </div>
-        <p>&copy; 2026 P-Fleet. All rights reserved.</p>
-        <p>Supported by POSTECH Computer Science</p>
-    </footer>
+<div class="section fade">
+  <h2>Secure by Design</h2>
+  <p>군 보안 기준을 충족하는 시스템</p>
+</div>
 
-    <script>
-        // DOM 요소 로드 후 애니메이션 실행
-        window.onload = function() {
-            // 기아의 프리미엄 3D 동전 애니메이션 (회전 및 부유)
-            anime({
-                targets: '#heroCoin',
-                scale: [0, 1], // 서서히 나타남
-                opacity: [0, 0.8], // 서서히 나타남
-                rotate: '1turn', // 한 바퀴 회전
-                translateY: ['10px', '-10px'], // 위아래로 둥둥 뜨기
-                duration: 3000,
-                easing: 'easeOutElastic(1, .8)', // 탄성 효과
-                loop: true, // 무한 반복
-                direction: 'alternate', // 방향 반전하며 반복
-            });
+<div class="section fade">
+  <h2>Business Model</h2>
+  <p>SaaS + Maintenance + Consulting</p>
+</div>
 
-            // 카카오 스타일의 다국어 풍선 아이콘 애니메이션 (서서히 위로 나타남)
-            anime({
-                targets: '.balloon-icon',
-                opacity: [0, 1],
-                translateY: ['20px', '0'],
-                delay: anime.stagger(200), // 요소마다 지연 시간
-                duration: 1000,
-                easing: 'easeOutQuad',
-            });
+<div class="section fade">
+  <h2>2026 → 2028+</h2>
+  <p>MVP → Pilot → Global Expansion</p>
+</div>
 
-            // 텍스트 오버레이 애니메이션: 서서히 위로 나타남
-            anime({
-                targets: '.hero-content > *',
-                opacity: [0, 1],
-                translateY: ['20px', '0'],
-                delay: anime.stagger(300), // 요소마다 지연 시간
-                duration: 1000,
-                easing: 'easeOutQuad',
-                complete: function() {
-                    // 애니메이션 완료 후 explore-btn에 호버 효과 추가
-                    document.querySelector('.explore-btn').addEventListener('mouseover', function() {
-                        anime({
-                            targets: this,
-                            translateY: -3,
-                            scale: 1.05,
-                            duration: 300,
-                            easing: 'easeOutSine'
-                        });
-                    });
-                    document.querySelector('.explore-btn').addEventListener('mouseout', function() {
-                        anime({
-                            targets: this,
-                            translateY: 0,
-                            scale: 1,
-                            duration: 300,
-                            easing: 'easeOutSine'
-                        });
-                    });
-                }
-            });
-        };
-    </script>
+<div class="section fade">
+  <h2>Future of Defense Robotics</h2>
+  <p>P-Fleet이 표준이 됩니다</p>
+</div>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+});
+
+document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
- 
