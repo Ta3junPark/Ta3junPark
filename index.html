@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Connect AI | Investor Relations</title>
+    <title>P-Fleet | IR Highlight</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
-        /* 기본 스타일 리셋 및 전역 설정 */
+        /* 전역 스타일 및 프리미엄 서체 설정 */
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         
         :root {
-            --bg-dark: #111111;
-            --bg-card: #222222;
+            --bg-dark: #0a0a0a; /* 기아의 프리미엄 다크 */
+            --bg-card: #141414;
             --text-main: #fcfcfc;
-            --text-muted: #aaaaaa;
-            --primary-accent: #00d9e8; /* 카카오의 밝은 느낌과 토스의 기술적 느낌의 조화 */
-            --border-color: #333333;
+            --text-muted: #888888;
+            --primary-accent: #38bdf8; /* P-Fleet 파란색 포인트 */
+            --border-color: #222222;
         }
 
         body {
@@ -51,14 +51,14 @@
             transition: 0.3s;
         }
 
-        /* 헤더 (Navigation) */
+        /* 헤더 (Navigation) - 기아 스타일의 깔끔한 상단 바 */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(17, 17, 17, 0.95);
-            padding: 1.5rem 2rem;
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -79,12 +79,7 @@
             font-weight: 500;
         }
 
-        .lang-select {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* 영웅 섹션 (Animated First Impression) */
+        /* 영웅 섹션 (Animated Hero Section) - 토스/기아 스타일 */
         .hero-section {
             height: 100vh;
             display: flex;
@@ -95,15 +90,16 @@
             overflow: hidden;
         }
 
-        /* 움직이는 기술 이미지 (CSS 및 JS로 구현) */
-        .animated-orb {
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle at 30% 30%, #5de6f7, #00d9e8 50%, #0099ab);
-            border-radius: 50%;
+        /* 기아의 프리미엄 3D 동전 이미지 통합 및 애니메이션 */
+        .animated-coin {
+            width: 300px;
+            height: 300px;
+            background-image: url('data:image/jpeg;base64,...'); /* image_7.png 속 동전 이미지 (실제 데이터로 대체 필요) */
+            background-size: contain;
+            background-repeat: no-repeat;
             position: absolute;
             opacity: 0.8;
-            filter: blur(2px);
+            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
         }
 
         /* 핵심 메시지 오버레이 */
@@ -160,97 +156,118 @@
         .section-title {
             font-size: 2.5rem;
             font-weight: 800;
-            margin-bottom: 4rem;
+            margin-bottom: 1rem;
             text-align: center;
             color: var(--text-main);
             letter-spacing: -0.03em;
         }
 
-        .section-title span {
-            color: var(--primary-accent);
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 4rem;
         }
 
-        /* 회사 소개 / 비전 */
-        .vision-grid {
+        /* 카카오 스타일의 다채로운 풍선 디자인 통합 */
+        .balloon-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
         }
 
-        .vision-card {
+        .balloon-card {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 3rem;
             transition: transform 0.3s ease;
+            position: relative;
         }
 
-        .vision-card:hover {
+        .balloon-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary-accent);
         }
 
-        .vision-card h3 {
+        .balloon-card h3 {
             font-size: 1.5rem;
             margin-top: 0;
             color: var(--primary-accent);
         }
 
-        .vision-card p {
+        .balloon-card p {
             color: var(--text-muted);
             margin-bottom: 0;
         }
 
-        /* 주요 재무 정보 */
-        .financial-summary {
+        /* 카카오 스타일의 다국어 풍선 아이콘 (JS로 나타남) */
+        .balloon-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--bg-dark);
+        }
+
+        /* 투자 하이라이트 (허위 정보 배제) */
+        .highlight-summary {
             background-color: var(--bg-card);
             padding: 4rem;
             border-radius: 20px;
             border: 1px solid var(--border-color);
         }
 
-        .financial-grid {
+        .highlight-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             text-align: center;
         }
 
-        .financial-item {
+        .highlight-item {
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 1.5rem;
         }
 
-        .financial-item:last-child {
+        .highlight-item:last-child {
             border-bottom: none;
             padding-bottom: 0;
         }
 
-        .financial-label {
+        .highlight-label {
             font-size: 0.9rem;
             color: var(--text-muted);
             margin-bottom: 0.5rem;
         }
 
-        .financial-value {
-            font-size: 2rem;
+        .highlight-value {
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--text-main);
         }
 
-        .financial-unit {
+        .highlight-unit {
             font-size: 0.8rem;
             color: var(--text-muted);
         }
 
-        /* 미디어 및 뉴스 */
-        .news-grid {
+        /* 로드맵 (시각적 개선) */
+        .roadmap-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
 
-        .news-card {
+        .roadmap-card {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
@@ -258,18 +275,18 @@
             transition: transform 0.3s ease;
         }
 
-        .news-card:hover {
+        .roadmap-card:hover {
             border-color: var(--primary-accent);
         }
 
-        .news-date {
+        .roadmap-date {
             color: var(--primary-accent);
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
 
-        .news-card h4 {
+        .roadmap-card h4 {
             font-size: 1.2rem;
             margin: 0 0 1rem 0;
             color: var(--text-main);
@@ -303,12 +320,12 @@
 <body>
 
     <header>
-        <div class="logo">Global Connect AI</div>
+        <div class="logo">P-Fleet</div>
         <nav>
             <ul>
-                <li><a href="#problem-solution">회사 소개</a></li>
-                <li><a href="#core-tech">핵심 기술</a></li>
-                <li><a href="#business-model">비즈니스</a></li>
+                <li><a href="#vision">비전</a></li>
+                <li><a href="#tech">핵심 기술</a></li>
+                <li><a href="#highlight">투자 하이라이트</a></li>
                 <li><a href="#roadmap">로드맵</a></li>
             </ul>
         </nav>
@@ -316,117 +333,137 @@
     </header>
 
     <div class="hero-section">
-        <div class="animated-orb" id="heroOrb"></div>
+        <div class="animated-coin" id="heroCoin"></div>
         
         <div class="hero-content">
-            <h1>기술로 여는 <span>무한한 가능성</span></h1>
-            <p>글로벌 AI 연결을 위한 도전과 혁신</p>
-            <a href="#core-tech" class="explore-btn">지금 시작하기</a>
+            <h1>로봇 오케스트레이션의 <span>새로운 기준</span></h1>
+            <p>VDA 5050 기반 이기종 로봇 통합 관제 플랫폼</p>
+            <a href="#highlight" class="explore-btn">투자 하이라이트 보기</a>
         </div>
     </section>
 
-    <section id="problem-solution">
+    <section id="vision">
         <h2 class="section-title">비전과 <span>사회적 가치</span></h2>
-        <div class="vision-grid">
-            <div class="vision-card">
+        <p class="section-subtitle">P-Fleet이 꿈꾸는 미래와 사회적 책임</p>
+        <div class="balloon-grid">
+            <div class="balloon-card">
+                <div class="balloon-icon" style="background-color: #ffeb3b;">Hello</div>
                 <h3>The Challenge</h3>
-                <p>AI 기술의 급격한 발전에도 불구하고, 데이터의 파편화와 보안 위협으로 인해 진정한 글로벌 지식 공유와 협력은 제한되어 있습니다.</p>
+                <p>이기종 로봇의 도입은 파편화된 데이터와 하드웨어 종속성으로 인해 비효율적이며 보안 위협에 노출되어 있습니다.</p>
             </div>
-            <div class="vision-card">
+            <div class="balloon-card">
+                <div class="balloon-icon" style="background-color: #ff9800;">Hola</div>
                 <h3>Our Vision</h3>
-                <p>Global Connect AI는 혁신적인 AI 기술을 통해 전 세계의 데이터를 안전하게 연결하고 상호운용성을 확보하여, 모든 사람이 지식의 혜택을 누리는 미래를 만듭니다.</p>
+                <p>P-Fleet은 혁신적인 AI와 국제 표준 규격을 통해 전 세계의 로봇을 안전하게 연결하고 오케스트레이션하여 모두를 위한 지식 혜택을 구현합니다.</p>
             </div>
         </div>
     </section>
 
-    <section id="core-tech">
-        <h2 class="section-title">글로벌 커넥트 AI의 <span>핵심 기술</span></h2>
-        <div class="vision-grid">
-            <div class="vision-card">
-                <h3>Orchestration Layer</h3>
-                <p>이기종 AI 모델과 데이터 세트를 유기적으로 통합하고 최적의 작업 할당을 수행하는 지능형 오케스트레이션 플랫폼입니다.</p>
+    <section id="tech">
+        <h2 class="section-title">P-Fleet의 <span>핵심 기술</span></h2>
+        <p class="section-subtitle">차별화된 기술력으로 여는 무한한 가능성</p>
+        <div class="balloon-grid">
+            <div class="balloon-card">
+                <div class="balloon-icon" style="background-color: #4caf50;">Namaste</div>
+                <h3>Fleet-Level AI Orchestration</h3>
+                <p>강화학습 기반의 지능형 작업 할당 및 충돌 방지 알고리즘을 통해 다중 로봇 간의 최적화된 Workflow control을 수행합니다.</p>
             </div>
-            <div class="vision-card">
-                <h3>Observability & Security</h3>
-                <p>AI 모델의 의사결정 과정을 투명하게 시각화하고 추적하는 Traceability 기술과 군 규격의 강력한 Data Access Control을 보장합니다.</p>
+            <div class="balloon-card">
+                <div class="balloon-icon" style="background-color: #3f51b5;">Hello</div>
+                <h3>VDA 5050 & M-BcN 보안</h3>
+                <p>국제 표준 규격 VDA 5050 채택으로 하드웨어 중립성을 확보하고, 군 규격의 강력한 M-BcN 데이터 액세스 제어와 명령 무결성 검증을 보장합니다.</p>
             </div>
-            <div class="vision-card">
-                <h3>Governance & Standardization</h3>
-                <p>국제 표준 규격을 준수하는 Data Contract 및 Federated Data Catalog를 통해 호환성과 거버넌스를 강화합니다.</p>
+            <div class="balloon-card">
+                <div class="balloon-icon" style="background-color: #e91e63;">Ciao</div>
+                <h3>Reasoning-Path Traceability</h3>
+                <p>AI 모델의 의사결정 과정을 투명하게 시각화하고 추적하는 Traceability 기술과 실시간 Telemetry 데이터를 통해 지휘관에게 Real-time dashboard를 제공합니다.</p>
             </div>
         </div>
     </section>
 
-    <section id="business-model">
-        <h2 class="section-title">주요 <span>재무 정보</span></h2>
-        <div class="financial-summary">
-            <div class="financial-grid">
-                <div class="financial-item">
-                    <p class="financial-label">1분기 매출</p>
-                    <p class="financial-value">1,500 <span class="financial-unit">억 원</span></p>
+    <section id="highlight">
+        <h2 class="section-title">투자 <span>하이라이트</span></h2>
+        <p class="section-subtitle">실질적인 마일스톤과 차별화된 가치</p>
+        <div class="highlight-summary">
+            <div class="highlight-grid">
+                <div class="highlight-item">
+                    <p class="highlight-label">파일럿 프로젝트</p>
+                    <p class="highlight-value">성공 <span class="highlight-unit">PoC</span></p>
                 </div>
-                <div class="financial-item">
-                    <p class="financial-label">순이익</p>
-                    <p class="financial-value">450 <span class="financial-unit">억 원</span></p>
+                <div class="highlight-item">
+                    <p class="highlight-label">육군 창업 경진대회</p>
+                    <p class="highlight-value">수상 <span class="highlight-unit">Achievement</span></p>
                 </div>
-                <div class="financial-item">
-                    <p class="financial-label">서비스 가입자</p>
-                    <p class="financial-value">5,000 <span class="financial-unit">만 명</span></p>
+                <div class="highlight-item">
+                    <p class="highlight-label">M-BcN 연동성</p>
+                    <p class="highlight-value">확보 <span class="highlight-unit">Security</span></p>
                 </div>
-                <div class="financial-item">
-                    <p class="financial-label">매출 성장률 (YTD)</p>
-                    <p class="financial-value">120 <span class="financial-unit">%</span></p>
+                <div class="highlight-item">
+                    <p class="highlight-label">CC 인증 준비</p>
+                    <p class="highlight-value">착수 <span class="highlight-unit">Compliance</span></p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="roadmap">
-        <h2 class="section-title">최신 <span>소식 및 미디어</span></h2>
-        <div class="news-grid">
-            <div class="news-card">
-                <p class="news-date">2026 Q4</p>
-                <h4>MVP 고도화 및 PoC 성공</h4>
-                <p>육군창업경진대회 수상 이후 법인 설립 완료. 자체 테스트베드 실증 PoC 성공.</p>
+        <h2 class="section-title">최신 <span>소식 및 로드맵</span></h2>
+        <p class="section-subtitle">성장을 향한 단계적 여정</p>
+        <div class="roadmap-grid">
+            <div class="roadmap-card">
+                <p class="roadmap-date">~ 2026 Q4</p>
+                <h4>MVP 고도화 및 법인 설립 완료</h4>
+                <p>자체 테스트베드 구축을 통한 AI 강화학습 모델 고도화 및 PoC 성공.</p>
             </div>
-            <div class="news-card">
-                <p class="news-date">2027 Q3</p>
-                <h4>아미타이거 4.0 시범 도입</h4>
+            <div class="roadmap-card">
+                <p class="roadmap-date">2027 Q2</p>
+                <h4>아미타이거 4.0 시범 도입 및 양산 확정</h4>
                 <p>방위사업청 신속시범획득사업 선정. 아미타이거 부대 시범 도입 및 레퍼런스 확보.</p>
             </div>
-            <div class="news-card">
-                <p class="news-date">2028 Q1 ~</p>
-                <h4>글로벌 국방 시장 진출 및 전군 전개</h4>
-                <p>국정원 CC 인증 획득 및 전군 드론작전사령부 전개. NATO 표준 호환 기술 개발 및 해외 수출 추진.</p>
+            <div class="roadmap-card">
+                <p class="roadmap-date">2027 Q4 ~</p>
+                <h4>전군 전개 및 글로벌 시장 진출</h4>
+                <p>국정원 CC 인증 획득 및 드론작전사령부 전개. NATO 표준 호환 기술 개발 및 해외 수출 추진.</p>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-logo">Global Connect AI | Investor Relations</div>
+        <div class="footer-logo">P-Fleet | Investor Relations</div>
         <nav class="footer-links">
-            <a href="#problem-solution">회사 소개</a>
-            <a href="#core-tech">핵심 기술</a>
-            <a href="#business-model">비즈니스</a>
+            <a href="#vision">비전</a>
+            <a href="#tech">핵심 기술</a>
+            <a href="#highlight">투자 하이라이트</a>
             <a href="#roadmap">로드맵</a>
         </div>
-        <p>&copy; 2026 Global Connect AI. All rights reserved.</p>
+        <p>&copy; 2026 P-Fleet. All rights reserved.</p>
+        <p>Supported by POSTECH Computer Science</p>
     </footer>
 
     <script>
         // DOM 요소 로드 후 애니메이션 실행
         window.onload = function() {
-            // 구체 애니메이션: 줌 인 및 부유 효과
+            // 기아의 프리미엄 3D 동전 애니메이션 (회전 및 부유)
             anime({
-                targets: '#heroOrb',
-                scale: [0, 1.2], // 처음부터 확대
+                targets: '#heroCoin',
+                scale: [0, 1], // 서서히 나타남
                 opacity: [0, 0.8], // 서서히 나타남
+                rotate: '1turn', // 한 바퀴 회전
                 translateY: ['10px', '-10px'], // 위아래로 둥둥 뜨기
-                duration: 2500,
-                easing: 'easeOutElastic(1, .8)', // 확대 시 탄성 효과
+                duration: 3000,
+                easing: 'easeOutElastic(1, .8)', // 탄성 효과
                 loop: true, // 무한 반복
                 direction: 'alternate', // 방향 반전하며 반복
-                delay: anime.stagger(200, {from: 'center'}) // 중앙부터 순차적 시작 (요소가 많을 때)
+            });
+
+            // 카카오 스타일의 다국어 풍선 아이콘 애니메이션 (서서히 위로 나타남)
+            anime({
+                targets: '.balloon-icon',
+                opacity: [0, 1],
+                translateY: ['20px', '0'],
+                delay: anime.stagger(200), // 요소마다 지연 시간
+                duration: 1000,
+                easing: 'easeOutQuad',
             });
 
             // 텍스트 오버레이 애니메이션: 서서히 위로 나타남
@@ -463,4 +500,3 @@
     </script>
 </body>
 </html>
- 
